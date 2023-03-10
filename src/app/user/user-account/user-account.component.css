@@ -1,0 +1,10 @@
+.img-preview{
+    height: 250px;   
+   }
+
+   .dropdown-list[_ngcontent-upt-c62] .filter-textbox[_ngcontent-upt-c62] input[_ngcontent-upt-c62] {
+    border: 0;
+    width: 100%;
+    padding: 0 0 0 26px;
+    height: auto;
+}

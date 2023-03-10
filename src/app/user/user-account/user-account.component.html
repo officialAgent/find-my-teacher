@@ -1,0 +1,158 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3 class="text-theme-primary"> {{formStatus}} Account Information</h3>
+            <p class="mb-5">You can {{formStatus}} Account Infromation</p>
+        </div>
+    </div>
+
+    <div *ngIf="postForm">
+
+        <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="card shadow-effect">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" formControlName="fname"
+                                    [ngClass]="{'is-invalid':fc['fname'].touched && fc['fname'].invalid}">
+                                <div *ngIf="fc['fname'].errors?.['required']">
+                                    <div class="alert alert-danger" *ngIf="fc['fname'].touched && fc['fname'].invalid">
+                                        Name is required</div>
+                                </div>
+                                <div *ngIf="fc['fname'].errors?.['minlength']">
+                                    <div class="alert alert-danger" *ngIf="fc['fname'].touched && fc['fname'].invalid">
+                                        Name must be atleast 5 charecters long</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" name="lname" formControlName="lname"
+                                    [ngClass]="{'is-invalid':fc['lname'].touched && fc['lname'].invalid}">
+                                <div *ngIf="fc['lname'].errors?.['lname']">
+                                    <div class="alert alert-danger" *ngIf="fc['lname'].touched && fc['lname'].invalid">
+                                        Last name is required
+                                    </div>
+                                </div>
+                                <div *ngIf="fc['lname'].errors?.['minlength']">
+                                    <div class="alert alert-danger" *ngIf="fc['lname'].touched && fc['lname'].invalid">
+                                        Name must be atleast 5 charecters long</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Short Introduction</label>
+                                <textarea cols="30" rows="10" class="form-control" formControlName="excerpt"
+                                    [ngClass]="{'is-invalid':fc['excerpt'].touched && fc['excerpt'].invalid}"></textarea>
+                                <div *ngIf="fc['excerpt'].errors?.['required']">
+                                    <div class="alert alert-danger"
+                                        *ngIf="fc['excerpt'].touched && fc['excerpt'].invalid">Introduction is
+                                        required</div>
+                                </div>
+                                <div *ngIf="fc['excerpt'].errors?.['minlength']">
+                                    <div class="alert alert-danger"
+                                        *ngIf="fc['excerpt'].touched && fc['excerpt'].invalid">Introduction
+                                        must be atleast
+                                        10 charecters long</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-5">
+
+                    <div class="card shadow-effect">
+                        <div class="card-body">
+                            <div class="form-group">
+
+                                <ng-multiselect-dropdown [placeholder]="'Select Category'" [settings]="dropdownSettings"
+                                    [data]="dropdownList" formControlName="category" [(ngModel)]="selectedItems"
+                                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                                <div *ngIf="fc['category'].errors?.['required']">
+                                    <div class="alert alert-danger"
+                                        *ngIf="fc['category'].touched && fc['category'].invalid">Category is required
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Porofile picture</label>
+                                <img [src]="imgSrc" class="form-control img-fluid img-preview">
+                                <input type="file" class="form-control" accept="image/*" (change)="showPreview($event)"
+                                    formControlName="postImg"
+                                    [ngClass]="{'is-invalid':fc['postImg'].touched && fc['postImg'].invalid}">
+                                <div *ngIf="fc['postImg'].errors?.['required']">
+                                    <div class="alert alert-danger"
+                                        *ngIf="fc['postImg'].touched && fc['postImg'].invalid">Image is required</div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card shadow-effect">
+                        <div class="card-body">
+                            <h5>Availability</h5>
+                            <div class="row mt-2 ml-2">
+
+                                <div class="form-check col-md-4">
+                                    <input formControlName="home" class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDisabled">
+                                    <label class="form-check-label" for="flexCheckDisabled">
+                                        <i class="fas fa-home text-theme-primary"></i> Home
+                                    </label>
+                                </div>
+                                <div class="form-check  col-md-4">
+                                    <input formControlName="online" class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDisabled">
+                                    <label class="form-check-label" for="flexCheckDisabled">
+                                        <i class="fas fa-network-wired text-theme-primary"></i> Online
+                                    </label>
+                                </div>
+                                <div class="form-check  col-md-4">
+                                    <input formControlName="group" class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDisabled">
+                                    <label class="form-check-label" for="flexCheckDisabled">
+                                        <i class="fas fa-users text-theme-primary"></i> Group
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-5">
+                <div class="col-md-12">
+                    <div class="card shadow-effect">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>About me</label>
+                                <angular-editor placholder="Add your contetn here"
+                                    formControlName="content"></angular-editor>
+                                <div *ngIf="fc['content'].errors?.['required']">
+                                    <div class="alert alert-danger"
+                                        *ngIf="fc['content'].touched && fc['content'].invalid">Content is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center mt-5">
+                    <button class="btn btn-info bg-theme" [disabled]="postForm.invalid">Save </button>
+                    <button class="btn btn-warning ml-3" routerLink="/">Back Dashboard</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
