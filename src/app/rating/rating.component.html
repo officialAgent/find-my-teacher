@@ -1,0 +1,7 @@
+<div class="rating">
+    <i class="fas fa-star" [ngClass]="{ 'active': rating >= 1 }" (click)="info ? null :onStarClick(1)"></i>
+    <i class="fas fa-star" [ngClass]="{ 'active': rating >= 2 }" (click)="info ? null :onStarClick(2)"></i>
+    <i class="fas fa-star" [ngClass]="{ 'active': rating >= 3 }" (click)="info ? null :onStarClick(3)"></i>
+    <i class="fas fa-star" [ngClass]="{ 'active': rating >= 4 }" (click)="info ? null :onStarClick(4)"></i>
+    <i class="fas fa-star" [ngClass]="{ 'active': rating >= 5 }" (click)="info ? null :onStarClick(5)"></i>
+</div>

@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="videos">
+                <div class="mb-3">
+                    <h3>Local Stream</h3>
+                    <video #webcamVideo autoplay playsinline></video>
+                </div>
+                <div>
+                    <h3>Remote Stream</h3>
+                    <video #remoteVideo autoplay playsinline></video>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <h2>4. Hangup</h2>
+            <button class="btn btn-danger" (click)="hangup()">Hangup</button>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

@@ -27,6 +27,19 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserAccountComponent } from './user/user-account/user-account.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MeetingComponent } from './meeting/meeting.component';
+import { HomeComponent } from './home/home/home.component';
+import { PostsComponent } from './home/posts/posts.component';
+import { SingleUserComponent } from './home/single-user/single-user.component';
+import { PostCardComponent } from './layouts/post-card/post-card.component';
+import { UserCardComponent } from './layouts/user-card/user-card.component';
+import { CategoryNavbarComponent } from './layouts/category-navbar/category-navbar.component';
+import { SingleCategoryComponent } from './home/single-category/single-category.component';
+import { SinglePostComponent } from './home/single-post/single-post.component';
+import { RatingComponent } from './rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +53,17 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     LoginComponent,
     RegisterComponent,
     UserAccountComponent,
+    CalendarComponent,
+    MeetingComponent,
+    HomeComponent,
+    PostsComponent,
+    SingleUserComponent,
+    PostCardComponent,
+    UserCardComponent,
+    CategoryNavbarComponent,
+    SingleCategoryComponent,
+    SinglePostComponent,
+    RatingComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +79,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AngularFireStorageModule,
     AngularFireAuthModule,
     NgMultiSelectDropDownModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

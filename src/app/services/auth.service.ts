@@ -36,13 +36,31 @@ export class AuthService {
     this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((legref) => {
-        this.login(email, password);
+        this.sendEmailVerification(email, password);
       })
       .catch((e) => {
         this.toastr.warning(e);
       });
   }
-
+  sendEmailVerification(email, password) {
+    this.afAuth.user.subscribe((user) => {
+      if (user) {
+        user
+          .sendEmailVerification()
+          .then(() => {
+            this.toastr.success(
+              'Registration successful. Please check your email for verification.'
+            );
+            // Automatically login after registration (optional)
+            this.login(email, password);
+          })
+          .catch((error) => {
+            // Handle email verification errors
+            this.toastr.warning(error.message);
+          });
+      }
+    });
+  }
   loadUser() {
     this.afAuth.authState.subscribe((user) => {
       localStorage.setItem('user', JSON.stringify(user));
@@ -55,7 +73,7 @@ export class AuthService {
       localStorage.removeItem('user');
       this.loggedIn.next(false);
       this.isLoggedInGuard = false;
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     });
   }
   isLoggedIn() {

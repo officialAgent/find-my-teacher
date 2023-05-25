@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
+import { da } from 'date-fns/locale';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 
@@ -42,8 +43,7 @@ export class UserInfoService {
       .doc(JSON.parse(localStorage.getItem('user')).uid)
       .set(postData)
       .then((docRef) => {
-        this.toastr.success('Data saved successfully');
-        this.router.navigate(['/']);
+        this.router.navigate(['userboard']);
       });
   }
 
@@ -54,11 +54,35 @@ export class UserInfoService {
       .update(postData)
       .then(() => {
         this.toastr.success('Data updated successfully');
-        this.router.navigate(['/']);
+        this.router.navigate(['userboard']);
       });
   }
 
   loadOneData(id) {
     return this.afs.collection('users').doc(id).valueChanges();
+  }
+  loadRole(id) {
+    console.log(id);
+    return this.afs
+      .collection('users')
+      .doc(id)
+      .get()
+      .toPromise()
+      .then((doc) => {
+        console.log('ccc' + doc);
+        if (doc.exists) {
+          const data = doc.data() as { role: string };
+          const response = data.role;
+          console.log('data' + data.role);
+          return response;
+        } else {
+          console.log('No such document!');
+          return null;
+        }
+      })
+      .catch((error) => {
+        console.log('Error getting document: ', error);
+        return null;
+      });
   }
 }

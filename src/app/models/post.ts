@@ -10,6 +10,6 @@ export interface Post {
   content: string;
   isFeatured: boolean;
   views: number;
-  status: string;
+  userId: any;
   createdAt: Date;
 }

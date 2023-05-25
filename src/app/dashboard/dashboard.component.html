@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-4 mb-5">
+        <h1 *ngIf="!verify">Please first verify your email</h1>
+        <div class="col-md-4 mb-5" *ngIf="verify">
             <div class="card shadow-effect " routerLink="/account" [queryParams]="{id:userId}">
                 <div class="card-body text-center bg-secondary-theme">
                     <h1 class="mt-3 text-theme-primary"><i class="fas fa-user"></i></h1>
@@ -9,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-5">
+        <div class="col-md-4 mb-5" *ngIf="createdUser && teacher">
             <div class="card shadow-effect " routerLink="/categories">
                 <div class="card-body text-center bg-secondary-theme">
                     <h1 class="mt-3 text-theme-primary"><i class="fas fa-clipboard-list"></i></h1>
@@ -19,7 +20,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-5">
+        <div class="col-md-4 mb-5" *ngIf="createdUser && teacher">
             <div class="card shadow-effect " routerLink="/posts">
                 <div class="card-body text-center bg-secondary-theme">
                     <h1 class="mt-3 text-theme-primary"><i class="fas fa-file-image"></i></h1>
@@ -29,8 +30,8 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-5">
-            <div class="card shadow-effect " routerLink="/posts">
+        <div class="col-md-4 mb-5" *ngIf="createdUser">
+            <div class="card shadow-effect " routerLink="/booking">
                 <div class="card-body text-center bg-secondary-theme">
                     <h1 class="mt-3 text-theme-primary"><i class="fas fa-calendar-check"></i></h1>
                     <h2 class="text-theme-primary"> Booking </h2>
@@ -39,15 +40,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-5">
-            <div class="card shadow-effect " routerLink="/posts">
-                <div class="card-body text-center bg-secondary-theme">
-                    <h1 class="mt-3 text-theme-primary"><i class="fas fa-signal"></i></h1>
-                    <h2 class="text-theme-primary"> Online Meeting </h2>
-                    <p> Manage Your Meetings Here. </p>
-                </div>
-            </div>
-        </div>
-        
+
+
     </div>
 </div>

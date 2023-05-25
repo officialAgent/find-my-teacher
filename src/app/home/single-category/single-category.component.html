@@ -1,0 +1,21 @@
+<div class="bg-theme p-5">
+    <div class="continer">
+        <h1 class="text-white">{{categoryName}}</h1>
+        <!-- <p class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ipsam et accusantium
+            laudantium illo ullam repellat quas quaerat voluptatem reprehenderit. Voluptatem reiciendis ducimus placeat
+            consequatur excepturi unde, soluta officia veritatis.</p> -->
+
+    </div>
+
+
+</div>
+
+<section class="container mt-5 mb-5">
+
+    <div class="row">
+        <div class="col-md-4 mt-3" *ngFor="let post of postArray">
+            <app-post-card [postData]="post"></app-post-card>
+        </div>
+
+    </div>
+</section>

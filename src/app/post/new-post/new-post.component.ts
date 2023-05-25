@@ -95,7 +95,7 @@ export class NewPostComponent implements OnInit {
       content: this.postForm.value.content,
       isFeatured: false,
       views: 0,
-      status: 'new',
+      userId: JSON.parse(localStorage.getItem('user')).uid,
       createdAt: new Date(),
     };
 

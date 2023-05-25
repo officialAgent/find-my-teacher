@@ -1,12 +1,21 @@
 <header class=" navbar navbar-expand-lg fixed-top bg-white shadow-effect">
 
     <div class="container justify-content-center">
-        <a routerLink="/" class="site-logo"> Find My teacher - User Dashboard </a>
+        <a routerLink="/" class="site-logo"> Find My teacher </a>
+        <button class="btn btn-info btn-sm bg-secondary-theme text-theme-primary ml-2 "
+            routerLink="allposts">Posts</button>
     </div>
-    <div class="container justify-content-center" *ngIf="isLoggedIn$ | async">
-        <a routerLink="/" class="mr-3"> {{userEmail}} </a>
+
+
+
+    <div class="container justify-content-center" *ngIf="isLoggedIn$ | async; else notloggedIn">
+        <a routerLink="userboard" class="mr-3 bg-secondary-theme rounded-lg text-theme-primary p-1"> User Dashboard </a>
+        <a routerLink="/" class="mr-3 "> {{userEmail}} </a>
         <button class="btn btn-info btn-sm bg-secondary-theme text-theme-primary" (click)="onLogout()">Logout</button>
     </div>
 
 
+    <ng-template #notloggedIn>
+        <button class="btn btn-info btn-sm bg-secondary-theme text-theme-primary" routerLink="login">Login</button>
+    </ng-template>
 </header>

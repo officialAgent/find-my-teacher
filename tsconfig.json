@@ -23,7 +23,10 @@
       "es2020",
       "dom"
     ],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true 
+
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

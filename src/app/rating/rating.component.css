@@ -1,0 +1,9 @@
+.rating {
+    display: inline-block;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .fa-star.active {
+    color: #f5b301;
+  }

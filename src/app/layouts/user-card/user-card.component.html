@@ -1,0 +1,22 @@
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center" *ngIf="postData"
+    [routerLink]="['/user', postData.id]">
+    <div class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center"> <img
+                src="{{postData.data.postImgPath}}" height="100" width="100" />
+            <span class="name mt-3">{{postData.data.fname}} {{postData.data.lname}}</span>
+
+            <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span
+                    class="number">{{postData.data.views}} <span class="follow">Views</span></span> </div>
+            <div class="text mt-3"> <span>{{postData.data.city.city.city}}</span> </div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <span class="join col-6 text-center text-secondary"
+                        *ngFor="let category of postData.data.category">{{
+                        category.item_text
+                        }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

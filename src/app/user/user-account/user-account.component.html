@@ -41,6 +41,21 @@
                                         Name must be atleast 5 charecters long</div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" name="email" formControlName="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" class="form-control" name="phone" formControlName="phone">
+                            </div>
+                            <div class="form-group ">
+                                <label for="role">Role</label>
+                                <select id="role" class="form-control" name="role" formControlName="role">
+                                    <option selected>User</option>
+                                    <option>Teacher</option>
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <label>Short Introduction</label>
@@ -67,7 +82,7 @@
 
                     <div class="card shadow-effect">
                         <div class="card-body">
-                            <div class="form-group">
+                            <div class="form-group" *ngIf="this.postForm.value.role=='Teacher'">
 
                                 <ng-multiselect-dropdown [placeholder]="'Select Category'" [settings]="dropdownSettings"
                                     [data]="dropdownList" formControlName="category" [(ngModel)]="selectedItems"
@@ -76,6 +91,20 @@
                                 <div *ngIf="fc['category'].errors?.['required']">
                                     <div class="alert alert-danger"
                                         *ngIf="fc['category'].touched && fc['category'].invalid">Category is required
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" *ngIf="this.postForm.value.role=='Teacher'">
+
+                                <ng-multiselect-dropdown [placeholder]="'Select City'"
+                                    [settings]="dropdownSettingsCities" [data]="dropdownListCities"
+                                    formControlName="cities" [(ngModel)]="selectedItemsCities"
+                                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                                <div *ngIf="fc['category'].errors?.['required']">
+                                    <div class="alert alert-danger"
+                                        *ngIf="fc['cities'].touched && fc['cities'].invalid">City is required
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +124,7 @@
 
                         </div>
                     </div>
-                    <div class="card shadow-effect">
+                    <div class="card shadow-effect" *ngIf="this.postForm.value.role=='Teacher'">
                         <div class="card-body">
                             <h5>Availability</h5>
                             <div class="row mt-2 ml-2">
@@ -120,6 +149,16 @@
                                     <label class="form-check-label" for="flexCheckDisabled">
                                         <i class="fas fa-users text-theme-primary"></i> Group
                                     </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5>Price/h</h5>
+                            <div class="row mt-2 ml-2">
+
+                                <div class="form-group">
+                                    <input type="number" min="0" class="form-control" name="price"
+                                        formControlName="price">
                                 </div>
                             </div>
                         </div>
