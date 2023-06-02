@@ -86,7 +86,7 @@
                         <div class="card shadow-effect my-4">
                             <div class="card-body">
                                 <h5>Rating</h5>
-                                <div class="row mt-2 ml-2">
+                                <div class="row mt-2 ml-2" *ngIf="isLoggedIn$ | async; else notloggedInRating">
                                     <app-rating [rating]="postData.rating" [info]="true"></app-rating>
                                     <button class="btn btn-primary float-right" (click)="openPopup()">Add
                                         Rating</button>
@@ -114,7 +114,15 @@
                                 </div>
                             </div>
                         </div>
-                        <p [innerHTML]="postData.content"></p>
+                        <div class="card shadow-effect my-4">
+                            <div class="card-body">
+                                <h5>About me</h5>
+                                <div class="row my-2 ml-2">
+                                    <p [innerHTML]="postData.content"></p>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
@@ -199,7 +207,11 @@
                         </form>
                         <!-- form end -->
                         <ng-template #notloggedIn>
-                            <h3>Login in to book leason</h3>
+                            <p class="text-warning">Login in to book leason</p>
+                        </ng-template>
+
+                        <ng-template #notloggedInRating>
+                            <p class="text-warning">Login in to leave rating</p>
                         </ng-template>
                     </div>
                 </div>

@@ -11,9 +11,11 @@ export class AllPostComponent implements OnInit {
   constructor(private postService: PostsService) {}
 
   ngOnInit(): void {
-    this.postService.loadData().subscribe((val) => {
-      this.postArray = val;
-    });
+    this.postService
+      .loadData(JSON.parse(localStorage.getItem('user')).uid)
+      .subscribe((val) => {
+        this.postArray = val;
+      });
   }
 
   onDelete(postImgPath, id) {

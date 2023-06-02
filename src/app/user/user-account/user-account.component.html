@@ -93,6 +93,33 @@
                                         *ngIf="fc['category'].touched && fc['category'].invalid">Category is required
                                     </div>
                                 </div>
+                                <div class="row mt-2 ml-2">
+
+                                    <button type="button" class=" btn-info" aria-label="Close" (click)="openPopup()">
+                                        Add category
+                                    </button>
+
+                                    <div #popup class="modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Add category</h4>
+                                                    <button type="button" class="close" aria-label="Close"
+                                                        (click)="closePopup()">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <app-categories></app-categories>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        (click)="closePopup()">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group" *ngIf="this.postForm.value.role=='Teacher'">

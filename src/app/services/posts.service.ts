@@ -46,19 +46,34 @@ export class PostsService {
       });
   }
 
-  loadData() {
-    return this.afs
-      .collection('posts')
-      .snapshotChanges()
-      .pipe(
-        map((actions) => {
-          return actions.map((a) => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return { id, data };
-          });
-        })
-      );
+  loadData(email = false) {
+    if (email == false) {
+      return this.afs
+        .collection('posts')
+        .snapshotChanges()
+        .pipe(
+          map((actions) => {
+            return actions.map((a) => {
+              const data = a.payload.doc.data();
+              const id = a.payload.doc.id;
+              return { id, data };
+            });
+          })
+        );
+    } else {
+      return this.afs
+        .collection('posts', (ref) => ref.where('userId', '==', email))
+        .snapshotChanges()
+        .pipe(
+          map((actions) => {
+            return actions.map((a) => {
+              const data = a.payload.doc.data();
+              const id = a.payload.doc.id;
+              return { id, data };
+            });
+          })
+        );
+    }
   }
 
   loadOneData(id) {

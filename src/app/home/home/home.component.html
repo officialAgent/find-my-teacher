@@ -26,21 +26,32 @@
 
         <div class="col-md-8 text-center">
 
-            <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [settings]="dropdownSettingsCities"
+            <ng-multiselect-dropdown [placeholder]="'Select City'" [settings]="dropdownSettingsCities"
                 [data]="dropdownListCities" [(ngModel)]="selectedItemsCities" (onSelect)="onItemSelect($event)"
                 (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
         </div>
         <div class="col-md-4 text-center">
             <button class="btn btn-info bg-theme" (click)="searchCity()">Search City </button>
-            <button class="btn btn-warning ml-3 " (click)=" searchClosestCity()">Search closest</button>
+            <button class="btn btn-warning ml-3 " (click)="searchClosestCity()">Search closest</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+
+        <div class="col-md-9 text-center">
+
+            <ng-multiselect-dropdown [placeholder]="'Select Category'" [settings]="dropdownSettings"
+                [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+        </div>
+        <div class="col-md-3 text-center">
+            <button class="btn btn-warning ml-3 " (click)="searchCategory()">Search</button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4 mt-3" *ngFor="let post of latestPostsArray">
             <app-user-card [postData]="post"></app-user-card>
         </div>
-
-
     </div>
 </section>

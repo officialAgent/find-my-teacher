@@ -2,6 +2,7 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { UserService } from 'src/app/services/home/user.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import Cities from '../../../assets/sk.json';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import Cities from '../../../assets/sk.json';
 })
 export class HomeComponent implements OnInit {
   cities: any = Cities;
+  categories: Array<any>;
   dropdownList = [];
   selectedItems = [];
   selectedItemsCities = [];
@@ -19,7 +21,10 @@ export class HomeComponent implements OnInit {
   featuredPostsArray: Array<any>;
   latestPostsArrayOriginal: Array<any>;
   latestPostsArray: Array<any>;
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private categoryService: CategoriesService
+  ) {
     this.userService.loadFeatured().subscribe((val) => {
       this.featuredPostsArray = val;
       console.log(this.featuredPostsArray);
@@ -48,6 +53,27 @@ export class HomeComponent implements OnInit {
         item_text: city.city,
       });
     });
+    this.categoryService.loadData().subscribe((val) => {
+      this.categories = val;
+      this.dropdownList = [];
+
+      this.categories.forEach((category, index) => {
+        this.dropdownList.push({
+          categoryId: category.id,
+          item_text: category.data.category,
+        });
+      });
+
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'categoryId',
+        textField: 'item_text',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true,
+        enableCheckAll: false,
+      };
+    });
   }
   onItemSelect(item: any) {
     console.log(this.selectedItemsCities);
@@ -62,6 +88,19 @@ export class HomeComponent implements OnInit {
       this.selectedItemsCities.forEach((city, index) => {
         this.latestPostsArray = this.latestPostsArrayOriginal.filter(
           (obj) => obj.data.city.cityId === city.citiesId
+        );
+      });
+    }
+  }
+  searchCategory() {
+    this.latestPostsArray = [];
+    this.latestPostsArray = this.latestPostsArrayOriginal;
+    if (this.selectedItems.length !== 0) {
+      this.selectedItems.forEach((category, index) => {
+        this.latestPostsArray = this.latestPostsArrayOriginal.filter((obj) =>
+          obj.data.category.some((cat, index) => {
+            return cat.categoryId === category.categoryId;
+          })
         );
       });
     }

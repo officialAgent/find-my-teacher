@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post';
@@ -31,7 +31,15 @@ export class UserAccountComponent implements OnInit {
   dropdownListCities = [];
   dropdownSettings: IDropdownSettings;
   dropdownSettingsCities: IDropdownSettings;
+  @ViewChild('popup') popup: ElementRef;
 
+  openPopup() {
+    this.popup.nativeElement.style.display = 'block';
+  }
+
+  closePopup() {
+    this.popup.nativeElement.style.display = 'none';
+  }
   constructor(
     private categoryService: CategoriesService,
     private fb: FormBuilder,
@@ -78,7 +86,7 @@ export class UserAccountComponent implements OnInit {
           lname: ['', [Validators.required, Validators.minLength(3)]],
           excerpt: [''],
           role: ['', Validators.required],
-          email: [''],
+          email: [JSON.parse(localStorage.getItem('user')).email],
           phone: [''],
           price: [''],
           category: [''],
